@@ -66,16 +66,13 @@ namespace JsonToLinqProject.Repositories
 
         public void CreatePelicula(string titulo, string director, int fecha, int duracion, string genero, string descripcion, string poster, string fondo)
         {
-            // Load existing peliculas
             string json = File.ReadAllText(this.pathPelisyseries);
             JObject jObject = JObject.Parse(json);
             JArray jArray = (JArray)jObject["peliculas"];
 
-            // Find the maximum id and assign it to the new pelicula
             int maxId = jArray.Max(p => (int)p["id"]);
             int idpelicula = maxId + 1;
 
-            // Create new JToken for the new pelicula
             JObject newJPelicula = new JObject(
                 new JProperty("id", idpelicula),
                 new JProperty("titulo", titulo),
@@ -88,7 +85,6 @@ namespace JsonToLinqProject.Repositories
                 new JProperty("fondo", fondo)
             );
 
-            // Add the new JToken to the array and save the updated file
             jArray.Add(newJPelicula);
             jObject["peliculas"] = jArray;
             File.WriteAllText(this.pathPelisyseries, jObject.ToString());
@@ -96,15 +92,12 @@ namespace JsonToLinqProject.Repositories
 
         public void UpdatePelicula(int idpelicula, string titulo, string director, int fecha, int duracion, string genero, string descripcion, string poster, string fondo)
         {
-            // Load existing peliculas
             string json = File.ReadAllText(this.pathPelisyseries);
             JObject jObject = JObject.Parse(json);
             JArray jArray = (JArray)jObject["peliculas"];
 
-            // Find the index of the pelicula to update
             int index = jArray.IndexOf(jArray.FirstOrDefault(p => (int)p["id"] == idpelicula));
 
-            // Update the pelicula and save the updated file
             jArray[index]["titulo"] = titulo;
             jArray[index]["director"] = director;
             jArray[index]["fecha"] = fecha;
@@ -120,15 +113,12 @@ namespace JsonToLinqProject.Repositories
 
         public void DeletePelicula(int id)
         {
-            // Load existing peliculas
             string json = File.ReadAllText(this.pathPelisyseries);
             JObject jObject = JObject.Parse(json);
             JArray jArray = (JArray)jObject["peliculas"];
 
-            // Find the index of the pelicula to delete
             int index = jArray.IndexOf(jArray.FirstOrDefault(p => (int)p["id"] == id));
 
-            // Remove the pelicula from the array and save the updated file
             jArray.RemoveAt(index);
             jObject["peliculas"] = jArray;
             File.WriteAllText(this.pathPelisyseries, jObject.ToString());

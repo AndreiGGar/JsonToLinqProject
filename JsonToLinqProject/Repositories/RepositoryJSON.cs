@@ -30,7 +30,9 @@ namespace JsonToLinqProject.Repositories
                 pelicula.Fecha = (int)jPelicula["fecha"];
                 pelicula.Duracion = (int)jPelicula["duracion"];
                 pelicula.Genero = (string)jPelicula["genero"];
+                pelicula.Descripcion = (string)jPelicula["descripcion"];
                 pelicula.Poster = (string)jPelicula["poster"];
+                pelicula.Fondo = (string)jPelicula["fondo"];
                 peliculas.Add(pelicula);
             }
             return peliculas;
@@ -51,7 +53,9 @@ namespace JsonToLinqProject.Repositories
                 pelicula.Fecha = (int)jPelicula["fecha"];
                 pelicula.Duracion = (int)jPelicula["duracion"];
                 pelicula.Genero = (string)jPelicula["genero"];
+                pelicula.Descripcion = (string)jPelicula["descripcion"];
                 pelicula.Poster = (string)jPelicula["poster"];
+                pelicula.Fondo = (string)jPelicula["fondo"];
                 return pelicula;
             }
             else
@@ -60,7 +64,7 @@ namespace JsonToLinqProject.Repositories
             }
         }
 
-        public void CreatePelicula(string titulo, string director, int fecha, int duracion, string genero, string poster)
+        public void CreatePelicula(string titulo, string director, int fecha, int duracion, string genero, string descripcion, string poster, string fondo)
         {
             // Load existing peliculas
             string json = File.ReadAllText(this.pathPelisyseries);
@@ -79,7 +83,9 @@ namespace JsonToLinqProject.Repositories
                 new JProperty("fecha", fecha),
                 new JProperty("duracion", duracion),
                 new JProperty("genero", genero),
-                new JProperty("poster", poster)
+                new JProperty("descripcion", descripcion),
+                new JProperty("poster", poster),
+                new JProperty("fondo", fondo)
             );
 
             // Add the new JToken to the array and save the updated file
@@ -88,7 +94,7 @@ namespace JsonToLinqProject.Repositories
             File.WriteAllText(this.pathPelisyseries, jObject.ToString());
         }
 
-        public void UpdatePelicula(int idpelicula, string titulo, string director, int fecha, int duracion, string genero, string poster)
+        public void UpdatePelicula(int idpelicula, string titulo, string director, int fecha, int duracion, string genero, string descripcion, string poster, string fondo)
         {
             // Load existing peliculas
             string json = File.ReadAllText(this.pathPelisyseries);
@@ -104,7 +110,9 @@ namespace JsonToLinqProject.Repositories
             jArray[index]["fecha"] = fecha;
             jArray[index]["duracion"] = duracion;
             jArray[index]["genero"] = genero;
+            jArray[index]["descripcion"] = descripcion;
             jArray[index]["poster"] = poster;
+            jArray[index]["fondo"] = fondo;
 
             jObject["peliculas"] = jArray;
             File.WriteAllText(this.pathPelisyseries, jObject.ToString());

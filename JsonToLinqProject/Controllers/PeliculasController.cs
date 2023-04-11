@@ -40,7 +40,7 @@ namespace JsonToLinqProject.Controllers
         [HttpPost]
         public IActionResult Update(Pelicula pelicula)
         {
-            this.repo.UpdatePelicula(pelicula.Id, pelicula.Titulo, pelicula.Director, pelicula.Fecha, pelicula.Duracion, pelicula.Genero, pelicula.Poster);
+            this.repo.UpdatePelicula(pelicula.Id, pelicula.Titulo, pelicula.Director, pelicula.Fecha, pelicula.Duracion, pelicula.Genero, pelicula.Descripcion, pelicula.Poster, pelicula.Fondo);
             return RedirectToAction("Index");
         }
 
@@ -52,7 +52,7 @@ namespace JsonToLinqProject.Controllers
         [HttpPost]
         public IActionResult Create(Pelicula pelicula)
         {
-            this.repo.CreatePelicula(pelicula.Titulo, pelicula.Director, pelicula.Fecha, pelicula.Duracion, pelicula.Genero, pelicula.Poster);
+            this.repo.CreatePelicula(pelicula.Titulo, pelicula.Director, pelicula.Fecha, pelicula.Duracion, pelicula.Genero, pelicula.Descripcion, pelicula.Poster, pelicula.Fondo);
             return RedirectToAction("Index");
         }
     }

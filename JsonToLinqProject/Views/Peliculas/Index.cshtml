@@ -1,19 +1,31 @@
 ﻿@model List<Pelicula>
 
+<div class="text-center mt-4" style="margin-bottom: -3em !important;">
+    <a asp-controller="Peliculas" asp-action="Create" class="btn btn-secondary m-auto">
+        Crear película
+    </a>
+</div>
+
 @foreach (Pelicula pelicula in Model)
 {
     <div class="movie_card" id="bright">
         <div class="info_section">
+            <div class="movie_edit">
+                <ul>
+                    <li><a asp-controller="Peliculas" asp-action="Update" asp-route-idpelicula="@pelicula.Id"><i class="fa-solid fa-pen-to-square"></i></a></li>
+                    <li><a asp-controller="Peliculas" asp-action="Delete" asp-route-idpelicula="@pelicula.Id"><i class="fa-solid fa-trash" style="color: darkred;" onmouseout="this.style.color='darkred'" onmouseover="this.style.color='#FFC107'"></i></a></li>
+                </ul>
+            </div>
             <div class="movie_header">
                 <img class="locandina" src="@pelicula.Poster" />
-                <h1 style="white-space: nowrap;">@pelicula.Titulo</h1>
+                <h1>@pelicula.Titulo</h1>
                 <h4>@pelicula.Fecha, @pelicula.Director</h4>
                 <span class="minutes">@pelicula.Duracion min.</span>
                 <p class="type">@pelicula.Genero</p>
             </div>
             <div class="movie_desc">
                 <p class="text">
-                    Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with an Orc to find a weapon everyone is prepared to kill for.
+                    @pelicula.Descripcion
                 </p>
             </div>
             <div class="movie_social">
@@ -24,7 +36,7 @@
                 </ul>
             </div>
         </div>
-        <div class="blur_back" style="background: url(@pelicula.Poster);">
+        <div class="blur_back" style="background: url(@pelicula.Fondo);">
         </div>
     </div>
 }
@@ -42,8 +54,8 @@
     .movie_card {
         position: relative;
         display: block;
-        max-width: 800px;
-        height: 350px;
+        max-width: 1000px;
+        height: 450px;
         margin: 80px auto;
         overflow: hidden;
         border-radius: 10px;
@@ -106,7 +118,7 @@
                 }
 
             .movie_card .info_section .movie_desc {
-                padding: 25px;
+                padding-left: 25px;
                 height: 50%;
             }
 
@@ -143,6 +155,42 @@
                             cursor: pointer;
                         }
 
+        .movie_card .movie_edit {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+
+            .movie_card .movie_edit ul {
+                display: flex;
+                justify-content: space-between;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+                .movie_card .movie_edit ul li {
+                    display: inline-block;
+                    transition: color 0.3s;
+                    transition-delay: 0.15s;
+                    margin: 0 10px;
+                }
+
+                .movie_card .movie_edit ul li {
+                    margin: 0 5px;
+                    display: inline-block;
+                }
+
+                    .movie_card .movie_edit ul li a {
+                        font-size: 19px;
+                        color: darkorange !important;
+                    }
+
+                        .movie_card .movie_edit ul li a:hover {
+                            color: #FFC107 !important;
+                        }
+
         .movie_card .blur_back {
             position: absolute;
             top: 0;
@@ -152,9 +200,10 @@
             border-radius: 11px;
         }
 
-    @@media screen and (min-width: 768px) {
+    @@media screen and (min-width: 992px) {
         .movie_header {
             width: 65%;
+            white-space: nowrap !important;
         }
 
         .movie_desc {
@@ -172,7 +221,7 @@
         }
     }
 
-    @@media screen and (max-width: 768px) {
+    @@media screen and (max-width: 992px) {
         .movie_card {
             width: 95%;
             margin: 70px auto;
@@ -182,12 +231,14 @@
 
         .blur_back {
             width: 100%;
-            background-position: 50% 50% !important;
+            background-position: 0% 0% !important;
+            background-size: contain !important;
         }
 
         .movie_header {
             width: 100%;
             margin-top: 85px;
+            white-space: normal !important;
         }
 
         .movie_desc {
@@ -197,6 +248,18 @@
         .info_section {
             background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
             display: inline-grid;
+        }
+    }
+
+    @@media screen and (max-width: 450px) {
+        .movie_card .blur_back {
+            height: 50% !important;
+        }
+
+        .blur_back {
+            width: 100%;
+            background-position: 50% 0% !important;
+            background-size: cover !important;
         }
     }
 </style>

@@ -1,0 +1,70 @@
+﻿@model JsonToLinqProject.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h4>Actualizar película: @Model.Titulo</h4>
+<hr />
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Id" class="control-label"></label>
+            <input type="hidden" asp-for="Id" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Director" class="control-label"></label>
+                <input asp-for="Director" class="form-control" />
+                <span asp-validation-for="Director" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duracion" class="control-label"></label>
+                <input asp-for="Duracion" class="form-control" />
+                <span asp-validation-for="Duracion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genero" class="control-label"></label>
+                <input asp-for="Genero" class="form-control" />
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poster" class="control-label"></label>
+                <input asp-for="Poster" class="form-control" />
+                <span asp-validation-for="Poster" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fondo" class="control-label"></label>
+                <input asp-for="Fondo" class="form-control" />
+                <span asp-validation-for="Fondo" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4 mb-4">
+                <input type="submit" value="Guardar" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver atrás</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

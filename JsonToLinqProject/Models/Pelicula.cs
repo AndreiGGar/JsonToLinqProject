@@ -8,6 +8,8 @@
         public int Fecha { get; set; }
         public int Duracion { get; set; }
         public string Genero { get; set; }
+        public string Descripcion { get; set; }
         public string Poster { get; set; }
+        public string Fondo { get; set; }
     }
 }
